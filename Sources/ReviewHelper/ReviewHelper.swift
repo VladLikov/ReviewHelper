@@ -108,7 +108,7 @@ public final class AppReview {
     
     private func request() {
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.async {
             #if os(iOS)
             if #available(iOS 14.0, *) {
                 if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {

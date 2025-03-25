@@ -5,27 +5,22 @@ import StoreKit
 
 public final class AppReview {
         
-    public let minLaunches: Int
-    public let minDays: Int
+    private var minLaunches: Int = 0
+    private var minDays: Int = 0
 
-    public init(minLaunches: Int = 0, minDays: Int = 0) {
-        self.minLaunches = minLaunches
-        self.minDays = minDays
-    }
-    
-    public static func requestImmediately(fromVC: UIViewController? = nil) {
-        let appReview = AppReview()
+    public func requestImmediately(fromVC: UIViewController? = nil) {
         if let fromVC {
-            appReview.showAlert(fromVC: fromVC)
+            showAlert(fromVC: fromVC)
         } else {
-            appReview.request()
+            request()
         }
     }
     
     @discardableResult
-    public static func requestIf(launches: Int = 0, days: Int = 0, fromVC: UIViewController? = nil) -> Bool {
-        let appReview = AppReview(minLaunches: launches, minDays: days)
-        return appReview.requestIfNeeded(fromVC: fromVC)
+    public func requestIf(launches: Int = 0, days: Int = 0, fromVC: UIViewController? = nil) -> Bool {
+        minLaunches = launches
+        minDays = days
+        return requestIfNeeded(fromVC: fromVC)
     }
     
     private let ud = UserDefaults.standard
@@ -73,11 +68,6 @@ public final class AppReview {
 
     @discardableResult
     public func requestIfNeeded(fromVC: UIViewController? = nil) -> Bool {
-        print("launches", launches)
-        print("daysAfterFirstLaunch", daysAfterFirstLaunch)
-        print("lastReviewDate", lastReviewDate)
-        print("lastReviewVersion", lastReviewVersion)
-
         if firstLaunchDate == nil { firstLaunchDate = Date() }
         launches += 1
         guard isNeeded else { return false }
@@ -104,7 +94,6 @@ public final class AppReview {
             
             let yesButton = UIAlertAction(title: NSLocalizedString("Yes, I like it!", bundle: .module, comment: ""),
                                           style: .default) { [weak self] _ in
-                print(self)
                 self?.request()
             }
             

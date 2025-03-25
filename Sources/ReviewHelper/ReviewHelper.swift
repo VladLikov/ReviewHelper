@@ -88,22 +88,25 @@ public final class AppReview {
     
     private func showAlert(fromVC: UIViewController) {
         
-        let title = NSLocalizedString("Do you like the app?", bundle: .module, comment: "")
-
-        let ac = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-        
-        let noButton = UIAlertAction(title: NSLocalizedString("No", bundle: .module, comment: ""),
-                                     style: .default)
-        
-        let yesButton = UIAlertAction(title: NSLocalizedString("Yes, I like it!", bundle: .module, comment: ""),
-                                      style: .default) { [weak self] _ in
-            self?.request()
+        DispatchQueue.main.async {
+            
+            let title = NSLocalizedString("Do you like the app?", bundle: .module, comment: "")
+            
+            let ac = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+            
+            let noButton = UIAlertAction(title: NSLocalizedString("No", bundle: .module, comment: ""),
+                                         style: .default)
+            
+            let yesButton = UIAlertAction(title: NSLocalizedString("Yes, I like it!", bundle: .module, comment: ""),
+                                          style: .default) { [weak self] _ in
+                self?.request()
+            }
+            
+            ac.addAction(noButton)
+            ac.addAction(yesButton)
+            
+            fromVC.present(ac, animated: true)
         }
-        
-        ac.addAction(noButton)
-        ac.addAction(yesButton)
-        
-        fromVC.present(ac, animated: true)
     }
     
     private func request() {

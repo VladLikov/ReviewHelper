@@ -5,9 +5,14 @@ import StoreKit
 
 public final class AppReview {
         
-    private var minLaunches: Int = 0
-    private var minDays: Int = 0
+    private var minLaunches: Int
+    private var minDays: Int
 
+    public init(minLaunches: Int = 0, minDays: Int = 0) {
+        self.minLaunches = minLaunches
+        self.minDays = minDays
+    }
+    
     public func requestImmediately(fromVC: UIViewController? = nil) {
         if let fromVC {
             showAlert(fromVC: fromVC)

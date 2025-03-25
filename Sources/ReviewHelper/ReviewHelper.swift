@@ -104,6 +104,7 @@ public final class AppReview {
             
             let yesButton = UIAlertAction(title: NSLocalizedString("Yes, I like it!", bundle: .module, comment: ""),
                                           style: .default) { [weak self] _ in
+                print(self)
                 self?.request()
             }
             

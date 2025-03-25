@@ -4,9 +4,7 @@
 import StoreKit
 
 public final class AppReview {
-    
-    static let shared = AppReview()
-    
+        
     public let minLaunches: Int
     public let minDays: Int
 
@@ -16,16 +14,18 @@ public final class AppReview {
     }
     
     public static func requestImmediately(fromVC: UIViewController? = nil) {
+        let appReview = AppReview()
         if let fromVC {
-            shared.showAlert(fromVC: fromVC)
+            appReview.showAlert(fromVC: fromVC)
         } else {
-            shared.request()
+            appReview.request()
         }
     }
     
     @discardableResult
     public static func requestIf(launches: Int = 0, days: Int = 0, fromVC: UIViewController? = nil) -> Bool {
-        shared.requestIfNeeded(fromVC: fromVC)
+        let appReview = AppReview(minLaunches: launches, minDays: days)
+        return appReview.requestIfNeeded(fromVC: fromVC)
     }
     
     private let ud = UserDefaults.standard

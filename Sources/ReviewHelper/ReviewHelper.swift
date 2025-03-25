@@ -17,7 +17,7 @@ public final class AppReview {
         if let fromVC {
             showAlert(fromVC: fromVC)
         } else {
-            request()
+            AppReview.request()
         }
     }
     
@@ -81,19 +81,15 @@ public final class AppReview {
         if let fromVC {
             showAlert(fromVC: fromVC)
         } else {
-            request()
+            AppReview.request()
         }
         return true
     }
     
     private func showAlert(fromVC: UIViewController) {
         
-        print("self1", self)
-
         DispatchQueue.main.async { [weak self] in
             
-            print("self2", self)
-
             let title = NSLocalizedString("Do you like the app?", bundle: .module, comment: "")
             
             let ac = UIAlertController(title: title, message: nil, preferredStyle: .alert)
@@ -103,8 +99,7 @@ public final class AppReview {
             
             let yesButton = UIAlertAction(title: NSLocalizedString("Yes, I like it!", bundle: .module, comment: ""),
                                           style: .default) { [weak self] _ in
-                print("self3", self)
-                self?.request()
+                AppReview.request()
             }
             
             ac.addAction(noButton)
@@ -114,7 +109,7 @@ public final class AppReview {
         }
     }
     
-    private func request() {
+    private static func request() {
         
         DispatchQueue.main.async {
             #if os(iOS)

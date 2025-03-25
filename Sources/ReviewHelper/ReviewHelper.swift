@@ -72,7 +72,7 @@ public final class AppReview {
     }
 
     @discardableResult
-    public func requestIfNeeded(fromVC: UIViewController? = nil) -> Bool {
+    private func requestIfNeeded(fromVC: UIViewController? = nil) -> Bool {
         if firstLaunchDate == nil { firstLaunchDate = Date() }
         launches += 1
         guard isNeeded else { return false }

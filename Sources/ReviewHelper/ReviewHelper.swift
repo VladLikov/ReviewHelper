@@ -44,7 +44,7 @@ public final class AppReview {
         get { ud.object(forKey: #function) as? Date }
         set(value) { ud.set(value, forKey: #function) }
     }
-    
+     
     public var lastReviewVersion: String? {
         get { ud.string(forKey: #function) }
         set(value) { ud.set(value, forKey: #function) }

@@ -22,9 +22,9 @@ public final class AppReview {
     }
     
     @discardableResult
-    public func requestIf(launches: Int = 0, days: Int = 0, fromVC: UIViewController? = nil) -> Bool {
-        minLaunches = launches
-        minDays = days
+    public func requestIf(minLaunches: Int = 0, minDays: Int = 0, fromVC: UIViewController? = nil) -> Bool {
+        self.minLaunches = minLaunches
+        self.minDays = minDays
         return requestIfNeeded(fromVC: fromVC)
     }
     
@@ -88,7 +88,7 @@ public final class AppReview {
     
     private func showAlert(fromVC: UIViewController) {
         
-        DispatchQueue.main.async { [weak self] in
+        DispatchQueue.main.async { 
             
             let title = NSLocalizedString("Do you like the app?", bundle: .module, comment: "")
             
@@ -98,7 +98,7 @@ public final class AppReview {
                                          style: .default)
             
             let yesButton = UIAlertAction(title: NSLocalizedString("Yes, I like it!", bundle: .module, comment: ""),
-                                          style: .default) { [weak self] _ in
+                                          style: .default) { _ in
                 AppReview.request()
             }
             

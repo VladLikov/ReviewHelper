@@ -7,12 +7,10 @@ import MessageUI
 
 public final class ReviewHelper: NSObject {
         
-    private var minLaunches: Int
-    private var minDays: Int
+    private var minLaunches: Int = 0
+    private var minDays: Int = 0
 
-    public init(minLaunches: Int = 0, minDays: Int = 0, email: String? = nil, appID: String? = nil) {
-        self.minLaunches = minLaunches
-        self.minDays = minDays
+    public init(email: String? = nil, appID: String? = nil) {
         self.email = email
         self.appID = appID
     }
@@ -69,7 +67,9 @@ public final class ReviewHelper: NSObject {
     }
 
     @discardableResult
-    public func requestIfNeeded(presentingVC: UIViewController? = nil) -> Bool {
+    public func requestIfNeeded(minLaunches: Int = 0, minDays: Int = 0, presentingVC: UIViewController? = nil) -> Bool {
+        self.minLaunches = minLaunches
+        self.minDays = minDays
         if firstLaunchDate == nil { firstLaunchDate = Date() }
         launches += 1
         guard isNeeded else { return false }
@@ -125,7 +125,7 @@ public final class ReviewHelper: NSObject {
                 style: .default
             ) { [weak self] _ in
                 guard let self else { return }
-                sendMail(presentingVC: presentingVC)
+                self.sendMail(presentingVC: presentingVC)
             }
             
             alert.addAction(laterAction)

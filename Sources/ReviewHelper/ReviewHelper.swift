@@ -69,7 +69,7 @@ public final class ReviewHelper: NSObject {
     }
 
     @discardableResult
-    private func requestIfNeeded(presentingVC: UIViewController? = nil) -> Bool {
+    public func requestIfNeeded(presentingVC: UIViewController? = nil) -> Bool {
         if firstLaunchDate == nil { firstLaunchDate = Date() }
         launches += 1
         guard isNeeded else { return false }

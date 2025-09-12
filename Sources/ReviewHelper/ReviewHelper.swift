@@ -88,7 +88,6 @@ public final class ReviewHelper: NSObject {
             let title = NSLocalizedString("Do you like the app?", bundle: .module, comment: "")
             let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
             
-            // 7) нормальные имена
             let dislikeAction = UIAlertAction(
                 title: NSLocalizedString("No", bundle: .module, comment: ""),
                 style: .default
@@ -100,7 +99,6 @@ public final class ReviewHelper: NSObject {
                 title: NSLocalizedString("Yes, I like it!", bundle: .module, comment: ""),
                 style: .default
             ) { _ in
-                // 4 + 8
                 self.requestSystemReviewOrFallback()
             }
             
@@ -133,8 +131,7 @@ public final class ReviewHelper: NSObject {
     }
     
     private func requestSystemReviewOrFallback() {
-        DispatchQueue.main.async { [weak self] in
-            guard let self else { return }
+        DispatchQueue.main.async { 
             
             #if os(iOS)
             guard UIApplication.shared.applicationState == .active else {

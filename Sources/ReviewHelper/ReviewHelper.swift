@@ -17,9 +17,9 @@ public final class ReviewHelper: NSObject {
         self.appID = appID
     }
     
-    public func requestImmediately(presentingViewController: UIViewController? = nil) {
-        if let presentingViewController {
-            showAlert(presentingViewController: presentingViewController)
+    public func requestImmediately(presentingVC: UIViewController? = nil) {
+        if let presentingVC {
+            showAlert(presentingVC: presentingVC)
         } else {
             requestSystemReviewOrFallback()
         }
@@ -69,21 +69,21 @@ public final class ReviewHelper: NSObject {
     }
 
     @discardableResult
-    private func requestIfNeeded(presentingViewController: UIViewController? = nil) -> Bool {
+    private func requestIfNeeded(presentingVC: UIViewController? = nil) -> Bool {
         if firstLaunchDate == nil { firstLaunchDate = Date() }
         launches += 1
         guard isNeeded else { return false }
         lastReviewDate = Date()
         lastReviewVersion = version
-        if let presentingViewController {
-            showAlert(presentingViewController: presentingViewController)
+        if let presentingVC {
+            showAlert(presentingVC: presentingVC)
         } else {
             requestSystemReviewOrFallback()
         }
         return true
     }
     
-    private func showAlert(presentingViewController: UIViewController) {
+    private func showAlert(presentingVC: UIViewController) {
         DispatchQueue.main.async {
             let title = NSLocalizedString("Do you like the app?", bundle: .module, comment: "")
             let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
@@ -94,7 +94,7 @@ public final class ReviewHelper: NSObject {
                 style: .default
             ) { [weak self] _ in
                 guard let self else { return }
-                self.showEmailAlert(presentingViewController: presentingViewController)
+                self.showEmailAlert(presentingVC: presentingVC)
             }
             
             let likeAction = UIAlertAction(
@@ -107,11 +107,11 @@ public final class ReviewHelper: NSObject {
             
             alert.addAction(dislikeAction)
             alert.addAction(likeAction)
-            presentingViewController.present(alert, animated: true)
+            presentingVC.present(alert, animated: true)
         }
     }
     
-    private func showEmailAlert(presentingViewController: UIViewController) {
+    private func showEmailAlert(presentingVC: UIViewController) {
         DispatchQueue.main.async {
             let title = NSLocalizedString("Help us improve the app", bundle: .module, comment: "")
             let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
@@ -125,12 +125,12 @@ public final class ReviewHelper: NSObject {
                 style: .default
             ) { [weak self] _ in
                 guard let self else { return }
-                sendMail(presentingViewController: presentingViewController)
+                sendMail(presentingVC: presentingVC)
             }
             
             alert.addAction(laterAction)
             alert.addAction(writeAction)
-            presentingViewController.present(alert, animated: true)
+            presentingVC.present(alert, animated: true)
         }
     }
     
@@ -197,12 +197,12 @@ extension ReviewHelper: MFMailComposeViewControllerDelegate {
         controller.dismiss(animated: true, completion: nil)
     }
     
-    private func sendMail(presentingViewController: UIViewController) {
+    private func sendMail(presentingVC: UIViewController) {
         guard let email else { return }
         
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController.getDefault(for: email)
-            presentingViewController.present(mail, animated: true)
+            presentingVC.present(mail, animated: true)
         } else if let url = URL(string: "mailto:\(email)") {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }

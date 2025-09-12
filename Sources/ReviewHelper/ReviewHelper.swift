@@ -131,7 +131,7 @@ public final class ReviewHelper: NSObject {
     }
     
     private func requestSystemReviewOrFallback() {
-        DispatchQueue.main.async { 
+        DispatchQueue.main.async {
             
             #if os(iOS)
             guard UIApplication.shared.applicationState == .active else {
@@ -316,29 +316,6 @@ public final class ReviewHelper: NSObject {
         }
     }
     
-    private func showEmailAlert(fromVC: UIViewController) {
-        
-        DispatchQueue.main.async {
-            
-            let title = NSLocalizedString("Give us feedback please", bundle: .module, comment: "")
-            
-            let ac = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-            
-            let noButton = UIAlertAction(title: NSLocalizedString("Not now", bundle: .module, comment: ""),
-                                         style: .default)
-            
-            let yesButton = UIAlertAction(title: NSLocalizedString("Write feedback", bundle: .module, comment: ""),
-                                          style: .default) { _ in
-                
-            }
-            
-            ac.addAction(noButton)
-            ac.addAction(yesButton)
-            
-            fromVC.present(ac, animated: true)
-        }
-    }
-    
     private static func request() {
         
         DispatchQueue.main.async {
@@ -364,27 +341,5 @@ public final class ReviewHelper: NSObject {
         Calendar.current.dateComponents([.day], from: start, to: end).day!
     }
     
-}
-
-// MARK: - Mail
-
-extension ReviewHelper: MFMailComposeViewControllerDelegate {
-    
-    public func mailComposeController(_ controller: MFMailComposeViewController,
-                               didFinishWith result: MFMailComposeResult, error: Error?) {
-        
-        controller.dismiss(animated: true, completion: nil)
-    }
-    
-    private func sendMail(fromVC: UIViewController) {
-        
-        guard MFMailComposeViewController.canSendEmail() else { return }
-
-        let mail = MFMailComposeViewController.getDefault(for: email)
-        
-        mail.mailComposeDelegate = self
-        
-        fromVC.present(mail, animated: true)
-    }
 }
 */

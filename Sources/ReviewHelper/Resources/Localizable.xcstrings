@@ -11,9 +11,6 @@
         }
       }
     },
-    "Give us feedback please" : {
-
-    },
     "Help us improve the app" : {
       "localizations" : {
         "ru" : {
@@ -44,21 +41,15 @@
         }
       }
     },
-    "Not now" : {
-
-    },
     "Send feedback" : {
       "localizations" : {
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Оставить отзыв"
+            "value" : "Написать нам"
           }
         }
       }
-    },
-    "Write feedback" : {
-
     },
     "Yes, I like it!" : {
       "localizations" : {

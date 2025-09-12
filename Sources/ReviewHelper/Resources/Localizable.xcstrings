@@ -11,6 +11,29 @@
         }
       }
     },
+    "Give us feedback please" : {
+
+    },
+    "Help us improve the app" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Помогите нам улучшить приложение"
+          }
+        }
+      }
+    },
+    "Maybe later" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Может позже"
+          }
+        }
+      }
+    },
     "No" : {
       "localizations" : {
         "ru" : {
@@ -20,6 +43,22 @@
           }
         }
       }
+    },
+    "Not now" : {
+
+    },
+    "Send feedback" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Оставить отзыв"
+          }
+        }
+      }
+    },
+    "Write feedback" : {
+
     },
     "Yes, I like it!" : {
       "localizations" : {

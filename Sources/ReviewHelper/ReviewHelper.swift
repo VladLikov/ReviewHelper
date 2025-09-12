@@ -25,13 +25,6 @@ public final class ReviewHelper: NSObject {
         }
     }
     
-    @discardableResult
-    public func requestIf(minLaunches: Int = 0, minDays: Int = 0, presentingViewController: UIViewController? = nil) -> Bool {
-        self.minLaunches = minLaunches
-        self.minDays = minDays
-        return requestIfNeeded(presentingViewController: presentingViewController)
-    }
-    
     private let ud = UserDefaults.standard
     
     public var launches: Int {

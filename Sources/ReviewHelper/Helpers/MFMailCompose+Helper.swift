@@ -6,7 +6,6 @@
 //
 
 import MessageUI
-import AlertKit
 
 public extension MFMailComposeViewController {
     

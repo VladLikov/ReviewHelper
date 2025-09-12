@@ -92,17 +92,16 @@ public final class ReviewHelper: NSObject {
             let dislikeAction = UIAlertAction(
                 title: NSLocalizedString("No", bundle: .module, comment: ""),
                 style: .default
-            ) { [weak self] _ in
-                guard let self else { return }
+            ) { _ in
                 self.showEmailAlert(presentingVC: presentingVC)
             }
             
             let likeAction = UIAlertAction(
                 title: NSLocalizedString("Yes, I like it!", bundle: .module, comment: ""),
                 style: .default
-            ) { [weak self] _ in
+            ) { _ in
                 // 4 + 8
-                self?.requestSystemReviewOrFallback()
+                self.requestSystemReviewOrFallback()
             }
             
             alert.addAction(dislikeAction)
@@ -123,8 +122,7 @@ public final class ReviewHelper: NSObject {
             let writeAction = UIAlertAction(
                 title: NSLocalizedString("Send feedback", bundle: .module, comment: ""),
                 style: .default
-            ) { [weak self] _ in
-                guard let self else { return }
+            ) { _ in
                 self.sendMail(presentingVC: presentingVC)
             }
             
